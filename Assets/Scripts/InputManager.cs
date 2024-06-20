@@ -8,6 +8,8 @@ public class InputManager : MonoBehaviour
 {
     public Action<bool> Right;
     public Action<bool> Left;
+    public Action Jump;
+    public Action Throw;
 
     public void RightClick(InputAction.CallbackContext context)
     {
@@ -19,5 +21,15 @@ public class InputManager : MonoBehaviour
     {
         if (context.started) Left?.Invoke(true);
         if (context.canceled) Left?.Invoke(false);
+    }
+
+    public void JumpClick(InputAction.CallbackContext context)
+    {
+        if (context.started) Jump?.Invoke();
+    }
+
+    public void ThrowClick(InputAction.CallbackContext context)
+    {
+        if (context.started) Throw?.Invoke();
     }
 }

@@ -10,7 +10,10 @@ public class PlayerMovingController : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerAnimatorController animator;
 
+
     public const float HORIZONTAL_SPEED_MULTIPLIER = 10f;
+    public const float JUMP_POWER = 120;
+    public const float VERTICAL_SPEED_MODIFIER = 1.4F;
 
     private float horizontalAcceleration;
 
@@ -18,11 +21,15 @@ public class PlayerMovingController : MonoBehaviour
     {
         InputManager.Right += Right;
         InputManager.Left += Left;
+        InputManager.Jump += Jump;
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.forward * horizontalAcceleration, 0.5f);
+        float up = rb.velocity.y;
+        if (up < 0) up *= VERTICAL_SPEED_MODIFIER;
+        else up /= VERTICAL_SPEED_MODIFIER;
+        rb.velocity = Vector3.Lerp(rb.velocity, Vector3.forward * horizontalAcceleration + Vector3.up * up, 0.5f);
         animator.SetSpeed(horizontalAcceleration / HORIZONTAL_SPEED_MULTIPLIER);
     }
 
@@ -50,9 +57,9 @@ public class PlayerMovingController : MonoBehaviour
             horizontalAcceleration = 0f;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Jump()
     {
-        
+        rb.AddForce(Vector3.up * JUMP_POWER, ForceMode.Impulse);
+        animator.Jump();
     }
 }
