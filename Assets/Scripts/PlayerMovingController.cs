@@ -40,8 +40,8 @@ public class PlayerMovingController : MonoBehaviour
 
     private void Right(bool value)
     {
-        animator.Move(value || horizontalAcceleration < 0);
         _move = value || horizontalAcceleration < 0;
+        animator.Move(_move);
         if (value)
         {
             horizontalAcceleration = HORIZONTAL_SPEED_MULTIPLIER;
@@ -53,8 +53,8 @@ public class PlayerMovingController : MonoBehaviour
 
     private void Left(bool value)
     {
-        animator.Move(value || horizontalAcceleration > 0);
-        _move = value || horizontalAcceleration < 0;
+        _move = value || horizontalAcceleration > 0;
+        animator.Move(_move);
         if (value)
         {
             horizontalAcceleration = -HORIZONTAL_SPEED_MULTIPLIER;
