@@ -8,10 +8,11 @@ public class PlayerMovingController : MonoBehaviour
     public InputManager InputManager;
 
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private CharacterController characterController;
     [SerializeField] private PlayerAnimatorController animator;
 
 
-    public const float HORIZONTAL_SPEED_MULTIPLIER = 10f;
+    public const float HORIZONTAL_SPEED_MULTIPLIER = 5f;
     public const float JUMP_POWER = 120;
     public const float VERTICAL_SPEED_MODIFIER = 1.4F;
 
@@ -59,6 +60,9 @@ public class PlayerMovingController : MonoBehaviour
 
     private void Jump()
     {
+        //if (!characterController.isGrounded) return;
+        if (!Mathf.Approximately(rb.velocity.y, 0f)) return;
+
         rb.AddForce(Vector3.up * JUMP_POWER, ForceMode.Impulse);
         animator.Jump();
     }
