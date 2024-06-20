@@ -17,6 +17,8 @@ public class PlayerMovingController : MonoBehaviour
     public const float VERTICAL_SPEED_MODIFIER = 1.4F;
 
     private float horizontalAcceleration;
+    private Vector3 _prevPos;
+    private bool _move;
 
     void Awake()
     {
@@ -31,12 +33,15 @@ public class PlayerMovingController : MonoBehaviour
         if (up < 0) up *= VERTICAL_SPEED_MODIFIER;
         else up /= VERTICAL_SPEED_MODIFIER;
         rb.velocity = Vector3.Lerp(rb.velocity, Vector3.forward * horizontalAcceleration + Vector3.up * up, 0.5f);
-        animator.SetSpeed(horizontalAcceleration / HORIZONTAL_SPEED_MULTIPLIER);
+        if (_move) animator.Move(Vector3.Distance(_prevPos, transform.position) > 0.001f)
+                .SetSpeed(horizontalAcceleration / HORIZONTAL_SPEED_MULTIPLIER);
+        _prevPos = transform.position;
     }
 
     private void Right(bool value)
     {
         animator.Move(value || horizontalAcceleration < 0);
+        _move = value || horizontalAcceleration < 0;
         if (value)
         {
             horizontalAcceleration = HORIZONTAL_SPEED_MULTIPLIER;
@@ -49,6 +54,7 @@ public class PlayerMovingController : MonoBehaviour
     private void Left(bool value)
     {
         animator.Move(value || horizontalAcceleration > 0);
+        _move = value || horizontalAcceleration < 0;
         if (value)
         {
             horizontalAcceleration = -HORIZONTAL_SPEED_MULTIPLIER;
@@ -61,7 +67,7 @@ public class PlayerMovingController : MonoBehaviour
     private void Jump()
     {
         //if (!characterController.isGrounded) return;
-        if (!Mathf.Approximately(rb.velocity.y, 0f)) return;
+        if (Mathf.Abs(rb.velocity.y) > 0.001f) return;
 
         rb.AddForce(Vector3.up * JUMP_POWER, ForceMode.Impulse);
         animator.Jump();
