@@ -5,23 +5,23 @@ using UnityEngine;
 
 public class PlatformCollisionHandler : MonoBehaviour
 {
-    [SerializeField] Collider platform;    
+    private const string targetTag = "Platform";
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name != "Player") return;
-        platform.isTrigger = true;
+        if (!other.gameObject.CompareTag(targetTag)) return;
+        other.isTrigger = true;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.name != "Player") return;
-        platform.isTrigger = true;
+        if (!other.gameObject.CompareTag(targetTag)) return;
+        other.isTrigger = true;
     }
 
     private void OnTriggerExit(Collider other) 
     {
-        if (other.gameObject.name != "Player") return;
-        platform.isTrigger = false;
+        if (!other.gameObject.CompareTag(targetTag)) return;
+        other.isTrigger = false;
     }
 }

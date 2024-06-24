@@ -15,9 +15,13 @@ MonoBehaviour:
   HorizontalMaxSpeed: 7
   PositiveHorizontalSpeedModifier: 0.1
   NegativeHorizontalSpeedModifier: 0.8
-  JumpPower: 200
+  JumpPower: 300
   PositiveVerticalSpeedModifier: 1.4
   NegativeVerticalSpeedModifier: 1.2
-  PlayerRadius: 0.2
   JumpCheckRayLength: 0.3
   CoyoteTime: 0.1
+  PlayerRadius: 0.2
+  ClamCapsuleHeight: 1.5
+  JumpCapsuleHeight: 1
+  ClamCapsuleYOffset: 0.75
+  JumpCapsuleYOffset: 1

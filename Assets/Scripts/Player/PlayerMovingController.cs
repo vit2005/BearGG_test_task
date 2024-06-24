@@ -44,7 +44,7 @@ public class PlayerMovingController : MonoBehaviour
         float horizontalSpeed = Mathf.Lerp(rb.velocity.z, targetHorizontalSpeed, horizontalModifier);
         rb.velocity = Vector3.forward * horizontalSpeed + Vector3.up * up;
 
-        Debug.Log(rb.velocity);
+        transform.position = new Vector3(0f, transform.position.y, transform.position.z);
 
         if (_move) animator.Move(Vector3.Distance(_prevPos, transform.position) > 0.001f)
                 .SetSpeed(targetHorizontalSpeed / _config.HorizontalMaxSpeed);
