@@ -8,5 +8,8 @@ public abstract class Config<T> : ScriptableObject where T : Config<T>
     protected static T _instance;
     public static T Instance => _instance;
 
-    public Config() { _instance = (T)this; }
+    public Config() 
+    { 
+        _instance = (T)this; 
+    }
 }
