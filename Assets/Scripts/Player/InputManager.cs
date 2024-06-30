@@ -10,6 +10,7 @@ public class InputManager : MonoBehaviour
     public Action<bool> Left;
     public Action Jump;
     public Action Throw;
+    public Action Escape;
 
     public void RightClick(InputAction.CallbackContext context)
     {
@@ -31,5 +32,10 @@ public class InputManager : MonoBehaviour
     public void ThrowClick(InputAction.CallbackContext context)
     {
         if (context.started) Throw?.Invoke();
+    }
+
+    public void EscapeClick(InputAction.CallbackContext context)
+    {
+        if (context.started) Escape?.Invoke();
     }
 }

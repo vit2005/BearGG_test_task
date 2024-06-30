@@ -32,7 +32,7 @@ public class PlayerMovingController : MonoBehaviour
     private void FixedUpdate()
     {
         if (Physics.Raycast(jumpHandler.position, Vector3.down, _config.JumpCheckRayLength) || Physics.Raycast(transform.position, Vector3.down, 0.1f))
-            _lastGroundedTime = Time.time;
+            _lastGroundedTime = Time.unscaledTime;
         float up = rb.velocity.y;
         if (up < 0) up *= _config.NegativeVerticalSpeedModifier;
         else up /= _config.PositiveVerticalSpeedModifier;
@@ -80,7 +80,7 @@ public class PlayerMovingController : MonoBehaviour
     private void Jump()
     {
         //if (!characterController.isGrounded) return;
-        if ((Time.time - _lastGroundedTime) > _config.CoyoteTime)
+        if ((Time.unscaledTime - _lastGroundedTime) > _config.CoyoteTime)
         {
             if (_delayedJump != null) StopCoroutine(_delayedJump);
             _delayedJump = StartCoroutine(DelayedJump());
