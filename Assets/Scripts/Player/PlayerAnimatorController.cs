@@ -5,12 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimatorController : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
 
     private const string JUMP = "Jump";
     private const string SPEED = "Speed";
     private const string MOVE = "Move";
     private const string THROW = "Throw";
+    private const string DEATH = "Death";
+
+    private void Awake()
+    {
+        HpHandler hpHandler = gameObject.GetComponent<HpHandler>();
+        if (hpHandler == null) return;
+
+        hpHandler.Death += Death;
+    }
 
     public PlayerAnimatorController Move(bool value)
     {
@@ -31,6 +40,10 @@ public class PlayerAnimatorController : MonoBehaviour
     public void Throw()
     {
         animator.SetTrigger(THROW);
+    }
+    public virtual void Death()
+    {
+        animator.Play(DEATH);
     }
 
 }

@@ -6,30 +6,21 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     [SerializeField] private int damage = 50;
-    int layer;
-    void Awake()
-    {
-        layer = LayerMask.NameToLayer(Layers.ENEMY);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer != layer) return;
-        var hpHandler = collision.gameObject.GetComponent<HpHandler>();
-        if (hpHandler == null) return;
-
-        hpHandler.Damage(damage);
-        gameObject.SetActive(false);
-        Destroy(gameObject);
-    }
+    [SerializeField] bool destroyOnDamage = false;
+    [SerializeField] LayerMask layers;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!Layers.IsLayerInLayerMask(other.gameObject.layer, layers)) return;
+
         var hpHandler = other.gameObject.GetComponent<HpHandler>();
         if (hpHandler == null) return;
 
         hpHandler.Damage(damage);
+        if (!destroyOnDamage) return;
+
         gameObject.SetActive(false);
         Destroy(gameObject);
     }
+    
 }
