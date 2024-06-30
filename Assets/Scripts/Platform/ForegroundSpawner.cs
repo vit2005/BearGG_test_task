@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ForegroundSpawner : MonoBehaviour
@@ -11,9 +12,10 @@ public class ForegroundSpawner : MonoBehaviour
     [SerializeField] private float rScale;
     [SerializeField] private float rRotation;
 
-    public void Awake()
+    
+    public List<OrderedSprite> Spawn()
     {
-        
+        List<OrderedSprite> spritesList = new();
         foreach (var sprite in sprites)
         {
             for (int i = 0; i < count; i++)
@@ -24,7 +26,10 @@ public class ForegroundSpawner : MonoBehaviour
                 o.transform.localScale *= rScale * Random.Range(0.1f, 1f);
                 if (Random.Range(0f, 1f) < 0.5f)
                     o.transform.localScale = new Vector3(-o.transform.localScale.x, o.transform.localScale.y, o.transform.localScale.z);
+                spritesList.Add(new OrderedSprite { sprite = o.GetComponent<SpriteRenderer>(), distance = position.x });
             }
         }
+
+        return spritesList;
     }
 }

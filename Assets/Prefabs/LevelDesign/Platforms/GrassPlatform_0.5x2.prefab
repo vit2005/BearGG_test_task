@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6858559498282510139}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -210,6 +210,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sprite3_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9008828994966580044, guid: e41713e6c9994b3409f6f6b731c4acb6,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9008828994966580044, guid: e41713e6c9994b3409f6f6b731c4acb6,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1766912163
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,11 +7,12 @@ using UnityEngine;
 
 public class AppController : MonoBehaviour
 {
+    public List<Config> configs;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-
+        foreach (var config in configs) { config.Init(); }
     }
 
 }
