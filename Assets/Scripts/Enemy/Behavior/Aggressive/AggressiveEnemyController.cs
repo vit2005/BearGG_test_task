@@ -14,7 +14,6 @@ public class AggressiveEnemyDataProvider : IBehaviorData
 public class AggressiveEnemyController : PatrolEnemyController
 {
     [SerializeField] private AggressiveZone aggressiveZone;
-    [SerializeField] private EnemyAnimatorController animator;
 
     private IEnemyBehavior _patrolBehavior;
     private IEnemyBehavior _aggressiveBehavior;

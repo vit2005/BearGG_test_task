@@ -7,19 +7,11 @@ public class PlayerAnimatorController : MonoBehaviour
 {
     [SerializeField] protected Animator animator;
 
-    private const string JUMP = "Jump";
-    private const string SPEED = "Speed";
-    private const string MOVE = "Move";
-    private const string THROW = "Throw";
-    private const string DEATH = "Death";
-
-    private void Awake()
-    {
-        HpHandler hpHandler = gameObject.GetComponent<HpHandler>();
-        if (hpHandler == null) return;
-
-        hpHandler.Death += Death;
-    }
+    protected const string JUMP = "Jump";
+    protected const string SPEED = "Speed";
+    protected const string MOVE = "Move";
+    protected const string THROW = "Throw";
+    protected const string DEATH = "Death";
 
     public PlayerAnimatorController Move(bool value)
     {

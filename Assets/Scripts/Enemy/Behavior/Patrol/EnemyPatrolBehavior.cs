@@ -32,6 +32,12 @@ public class EnemyPatrolBehavior : IEnemyBehavior
         _target.transform.LookAt(_currentPoint.transform);
     }
 
+    public void OnRevive()
+    {
+        _target.transform.localPosition = Vector3.zero;
+        _target.transform.LookAt(_currentPoint.transform);
+    }
+
     public void OnUpdate()
     {
         _target.transform.Translate(Vector3.forward * _speed * Time.deltaTime);

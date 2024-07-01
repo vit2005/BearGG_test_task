@@ -19,4 +19,9 @@ public class HpHandler : MonoBehaviour
             Death?.Invoke();
         }
     }
+
+    public void Revive()
+    {
+        _hp = 100;
+    }
 }

@@ -21,8 +21,15 @@ public class EnemyAggressiveBehavior : IEnemyBehavior
         aggroData.animator.SetSpeed(aggroData.speed);
     }
 
+    public void OnRevive()
+    {
+
+    }
+
     public void OnUpdate()
     {
+        _target.transform.LookAt(_player);
+        _target.transform.eulerAngles = new Vector3(0f, _target.transform.eulerAngles.y, 0f);
         _target.transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 }

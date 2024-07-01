@@ -5,5 +5,8 @@ using UnityEngine;
 
 public class EnemyAnimatorController : PlayerAnimatorController
 {
-
+    public void Revive()
+    {
+        animator.Play(MOVE);
+    }
 }
