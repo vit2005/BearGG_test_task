@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyAggressiveBehavior : IEnemyBehavior
 {
     private GameObject _target;
+    private Transform _player;
+    private float _speed;
 
     public EnemyAggressiveBehavior(GameObject target)
     {
@@ -13,11 +15,14 @@ public class EnemyAggressiveBehavior : IEnemyBehavior
 
     public void Init(IBehaviorData data)
     {
-        throw new System.NotImplementedException();
+        var aggroData = data as AggressiveEnemyDataProvider;
+        _player = aggroData.player;
+        _speed = aggroData.speed;
+        aggroData.animator.SetSpeed(aggroData.speed);
     }
 
     public void OnUpdate()
     {
-        throw new System.NotImplementedException();
+        _target.transform.Translate(Vector3.forward * _speed * Time.deltaTime);
     }
 }

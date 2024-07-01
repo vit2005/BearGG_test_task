@@ -6,13 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyPatrolDataProvider))]
 public class PatrolEnemyController : EnemyController
 {
-    [SerializeField] private EnemyPatrolDataProvider data;
-    [SerializeField] private GameObject target;
+    [SerializeField] protected EnemyPatrolDataProvider data;
 
-    private bool isAlive = true;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         var collider = target.GetComponent<Collider>();
         foreach (var item in data.points)
         {
@@ -21,17 +20,5 @@ public class PatrolEnemyController : EnemyController
 
         behavior = EnemyBehaviorsFactory.GetInstance(target, BehaviorType.Patrol);
         behavior.Init(data);
-
-        target.GetComponent<HpHandler>().Death += Death;
-    }
-
-    private void Death()
-    {
-        isAlive = false;
-    }
-
-    private void Update()
-    {
-        if (isAlive) behavior.OnUpdate();
     }
 }
